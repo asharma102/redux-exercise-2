@@ -11,7 +11,7 @@ class Persons extends Component {
 
         return (
             <div>
-                <AddPerson personAdded={() => this.props.personAddedHandler()} />
+                <AddPerson personAdded={this.props.personAddedHandler} />
                 {this.props.prsn.map(person => (
                     <Person
                         key={person.id}
@@ -33,12 +33,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        personAddedHandler: (newPerson) => dispatch({
+        personAddedHandler: (name, age, id) => dispatch({
             type: actionTypes.ADD_PERSON,
             payload: {
-                id: Math.random(), // not really unique but good enough here!
-                name: 'Max',
-                age: Math.floor(Math.random() * 40)
+                id: id, // not really unique but good enough here!
+                name: name,
+                age: age
             }
         }),
         personDeletedHandler: (deleteID) => dispatch({ type: actionTypes.DELETE_PERSON, id: deleteID })
